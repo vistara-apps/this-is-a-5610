@@ -1,7 +1,9 @@
 import React from 'react'
-import { Sparkles, Home, CreditCard } from 'lucide-react'
+import { Sparkles, Home, CreditCard, LogIn, LogOut, User } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 
-const Header = ({ currentView, setCurrentView, subscriptionTier }) => {
+const Header = ({ currentView, setCurrentView, subscriptionTier, onAuthClick, isAuthenticated }) => {
+  const { signOut, user } = useAuth()
   const getTierBadge = () => {
     const tierColors = {
       free: 'bg-gray-100 text-gray-800',
@@ -14,6 +16,14 @@ const Header = ({ currentView, setCurrentView, subscriptionTier }) => {
         {subscriptionTier.charAt(0).toUpperCase() + subscriptionTier.slice(1)}
       </span>
     )
+  }
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
   }
 
   return (
@@ -46,7 +56,30 @@ const Header = ({ currentView, setCurrentView, subscriptionTier }) => {
               <span>Pricing</span>
             </button>
             
-            {getTierBadge()}
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-4">
+                {getTierBadge()}
+                <div className="flex items-center space-x-2 text-gray-600">
+                  <User className="w-4 h-4" />
+                  <span className="text-sm">{user?.email}</span>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  className="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-red-600 transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={onAuthClick}
+                className="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-blue-600 transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Sign In</span>
+              </button>
+            )}
           </nav>
         </div>
       </div>

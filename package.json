@@ -1,25 +1,58 @@
 {
   "name": "contentspark",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Ignite your content with interactive elements and AI insights",
+  "keywords": ["content", "interactive", "ai", "summaries", "polls", "quizzes"],
+  "author": "ContentSpark Team",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext js,jsx --fix",
+    "type-check": "tsc --noEmit",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:push": "supabase db push",
+    "db:pull": "supabase db pull",
+    "db:generate-types": "supabase gen types typescript --local > src/types/database.types.ts"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "openai": "^4.20.0",
+    "@headlessui/react": "^1.7.17",
+    "@supabase/supabase-js": "^2.57.2",
     "lucide-react": "^0.263.1",
-    "@headlessui/react": "^1.7.17"
+    "openai": "^4.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.4.1",
-    "tailwindcss": "^3.4.11",
+    "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
-    "autoprefixer": "^10.4.0"
-  }
+    "tailwindcss": "^3.4.11",
+    "vite": "^5.4.1",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vistara-apps/this-is-a-5610.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vistara-apps/this-is-a-5610/issues"
+  },
+  "homepage": "https://contentspark.com"
 }
